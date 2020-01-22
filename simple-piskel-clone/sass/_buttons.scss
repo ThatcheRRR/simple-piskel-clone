@@ -1,0 +1,13 @@
+.colors__descr_link:hover, .tools__descr_link:hover, .switcher__size:hover {
+    cursor: pointer;
+    background: lighten(#C4C4C4, 10%);
+}
+.current-size {
+    background: #C4C4C4;
+    &__checkbox {
+        background: #000000;
+    }
+}
+.active-tool {
+    background: #C4C4C4;
+}

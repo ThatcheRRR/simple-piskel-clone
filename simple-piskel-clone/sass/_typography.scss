@@ -1,0 +1,25 @@
+%link-font {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.541327);
+}
+h1 {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    a {
+        text-decoration: none;
+        color: rgba(0, 0, 0, 0.87);
+    }
+}
+.tools__descr_link, .colors__descr_link, .switcher__size {
+    @extend %link-font;
+}
+.shortcuts {
+
+}
