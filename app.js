@@ -44,7 +44,6 @@ let snapshot;
 let brush;
 
 // default settings
-shortcuts.classList.add('closed');
 pencil.classList.add('active-tool');
 brush = 1;
 brushes[0].classList.add('active-brush');
