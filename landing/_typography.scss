@@ -1,0 +1,46 @@
+%link-font {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    color: #fff;
+}
+
+* {
+    @extend %link-font;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.info {
+    font-size: 40px;
+    padding-top: 20px;
+    & span {
+        font-weight: bold;
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+.link:hover {
+    color: midnightblue;
+}
+
+.create-sprite {
+    color: #000;
+    font-size: 24px;
+}
+
+.overview {
+    &__heading {
+        font-weight: bold;
+        font-size: 1.3em;
+    }
+    &__left {
+        text-align: right;
+    }
+}

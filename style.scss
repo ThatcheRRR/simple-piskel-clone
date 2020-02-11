@@ -18,7 +18,6 @@ header {
             display: flex;
             align-items: center;
             h1 {
-                margin-left: 25px;
                 &:hover {
                     cursor: pointer;
                 }
@@ -30,13 +29,13 @@ header {
     }
 }
 .container {
+    height: 100%;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 .tools {
-    margin-top: 75px;
     margin-left: 29px;
     width: 228px;
     background: #FFFFFF;
@@ -62,7 +61,7 @@ header {
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
-    padding: 0 20px;
+    padding: 5px 20px;
     &__size {
         width: 20px;
         height: 20px;
@@ -107,51 +106,41 @@ header {
     border: 2px solid #00BCD4;
 }
 .colors {
+    display: flex;
     margin-top: 92px;
     margin-left: 29px;
-    width: 228px;
-    background: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
     &__descr {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        &_link {
-            padding-left: 20px;
-            display: flex;
-            align-items: center;
-            width: 100%;
-            height: 48px;
-            &_circle {
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                border: 1px solid #000000;
-                box-sizing: border-box;
-            }
-            .cur-color {
-                background: #FFC107;
-            }
-            .prev-color {
-                background: #FFEB3B;
-            }
-            .red-color {
-                background: #F74141;
-            }
-            .blue-color {
-                background: #00BCD4;
-            }
-            span {
-                margin-left: 35px;
-            }
+        position: relative;
+        height: 50px;
+        width: 50px;
+        border: none;
+        z-index: 1;
+        &:nth-child(2) {
+            top: 30px;
+            right: 20px;
+            z-index: 0;
         }
+        &:hover {
+            background: #c0c0c0;
+        }
+    }
+    &__swap {
+        position: relative;
+        right: 95px;
+        top: 55px;
+        display: block;
+        width: 20px;
+        height: 20px;
+        background: url('./assets/arrow.svg');
+        border: none;
+        transform: scaleX(-1);
+        cursor: pointer;
     }
 }
 .switcher {
-    width: 228px;
+    width: 100%;
     height: 246px;
     margin-top: 160px;
-    margin-right: 50px;
     display: flex;
     flex-wrap: wrap;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
@@ -180,13 +169,11 @@ canvas {
     height: 100%;
     image-rendering: pixelated;
     border: 1px solid #000000;
-}
-#canvas2 {
-    display: none;  
+    background-color: #fff;
 }
 .canvas-settings {
-    display: flex;
-    flex-wrap: wrap;
+    width: 228px;
+    margin-right: 50px;
 }
 .shortcuts {
     z-index: 999;
@@ -217,11 +204,37 @@ canvas {
         }
     }
     &__keys {
+        padding: 50px;
         display: flex;
         flex-wrap: wrap;
         height: 90%;
-        width: 100%;
         background: #333;
+        box-sizing: border-box;
+        &_key {
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .hotkey {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+            width: 40px;
+            margin-right: 20px;
+            margin-left: 20px;
+            border: 2px solid #00BCD4;
+            box-sizing: border-box;
+            border-radius: 30%;
+            &-image {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 40px;
+                height: 40px;
+                background:#3a3a3a;
+            }
+        }
     }
 }
 .closed {
@@ -239,4 +252,116 @@ canvas {
             opacity: 1;
         }
     }
+}
+.anim-player {
+    max-width: 200px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.preview {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #333;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+}
+.fps {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5px;
+    align-items: center;
+    &__current {
+        margin-right: 5px;
+    }
+}
+.frames {
+    height: 100%;
+    max-width: 100px;
+    &-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+.frame {
+    width: 96px;
+    height: 96px;
+    border: 2px solid #333;
+    border-radius: 3px;
+    image-rendering: pixelated;
+    &:hover {
+        cursor: pointer;
+        border: 2px solid #c4c4c4;
+    }
+    &-block {
+        position: relative;
+        height: 100px;
+        margin-bottom: 5px;
+    }
+    &-num {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom-right-radius: 3px;
+        background: #00BCD4;
+    }
+    &-remove {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom-left-radius: 3px;
+        background: #c4c4c4;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    &-copy {
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top-left-radius: 3px;
+        background: #c4c4c4;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+.active-frame {
+    border: 2px solid #00BCD4 !important;
+    &:hover {
+        border: 2px solid #00BCD4;
+    }
+}
+.add-frame {
+    display: flex;
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #333;
+    border-radius: 3px;
+    &:hover {
+        cursor: pointer;
+        border: 2px solid #00BCD4;
+    }
+}
+.add-image {
+    display: flex;
+    margin-right: 5px;
+    align-items: center;
 }

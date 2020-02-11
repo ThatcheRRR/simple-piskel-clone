@@ -1,4 +1,4 @@
-const canvas = document.querySelector('canvas');
+const canvas = document.querySelector('#canvas');
 const pencil = document.querySelector('.pencil');
 const bucket = document.querySelector('.bucket');
 const stroke = document.querySelector('.stroke');
@@ -12,24 +12,33 @@ const brushes = document.querySelectorAll('.brush__size');
 const close = document.querySelector('.shortcuts__header_close');
 const shortcuts = document.querySelector('.shortcuts');
 const showShortcuts = document.querySelector('.keys__binds');
+const colorSwap = document.querySelector('.colors__swap');
+const firstColor = document.querySelector('.cur-color');
+const secColor = document.querySelector('.sec-color');
+const colors = document.querySelector('.colors');
+const fps = document.querySelector('.fps__change');
+const curFps = document.querySelector('.fps__current');
+const addFrame = document.querySelector('.add-frame');
+const frames = document.querySelector('.frames-container');
+const preview = document.querySelector('.preview');
+const ctx = canvas.getContext('2d');
+const tools = ['bucket', 'floodfill', 'colorPicker', 'pencil', 'eraser', 'stroke'];
 const pencilCode = 80;
 const bucketCode = 66;
 const chooseCode = 67;
 const strokeCode = 76;
 const eraserCode = 69;
 const floodCode = 70;
+const swapCode = 88;
 const maxFieldSize = canvas.height * 5;
 const small = 32;
 const medium = 64;
 const large = 128;
-const ctx = canvas.getContext('2d');
-const previous = document.querySelector('.previous-color');
-const colors = document.querySelector('.colors');
-const tools = ['bucket', 'floodfill', 'colorPicker', 'pencil', 'eraser', 'stroke'];
+const sec = 1000;
+const imgArr = [];
 
 let pickerActive = false;
-let currentColor = '#FFC107';
-let previousColor = '#FFEB3B';
+let currentColor = firstColor.value;
 let activeTool = 'pencil';
 let sc = null;
 let previousPosition = null;
@@ -39,28 +48,197 @@ let erase = false;
 let strokeEnable = false;
 let filling = false;
 let dragging = false;
+let currentFrame = 0;
+let fpsNum = +fps.value;
+let now;
+let index;
+let then;
+let elapsed;
+let activeFrame;
 let dragStartLocation;
+let removeFrame = document.querySelector('.frame-remove');
+let copyFrame = document.querySelector('.frame-copy');
 let snapshot;
 let brush;
+let block;
+let activeCtx;
+let temp;
+let canvasFrame;
+let timeoutMs = sec / fpsNum;
 
 // default settings
 pencil.classList.add('active-tool');
+curFps.innerText = fps.value + ' ' + 'FPS';
 brush = 1;
 brushes[0].classList.add('active-brush');
 sizeSwitcher[sizeSwitcher.length - 1].classList.add('current-size');
 checkbox[sizeSwitcher.length - 1].classList.add('current-size__checkbox');
+copyFrame.addEventListener('mousedown', copy);
+function clearCanvas() {
+  ctx.fillStyle = '#FFF';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+clearCanvas();
 // 
 
 function setCanvasSize(size) {
   sc = maxFieldSize / size;
   canvas.width = maxFieldSize / sc;
   canvas.height = maxFieldSize / sc;
+  preview.width = size;
+  preview.height = size;
+  canvasFrame.forEach((elem) => {
+    elem.width = size;
+    elem.height = size;
+  })
+}
+
+function fpsChange() {
+  curFps.innerText = fps.value + ' ' + 'FPS';
+  fpsNum = +fps.value;
+  timeoutMs = Math.round(sec / fpsNum);
 }
 
 function changeColors() {
-  if (previousColor === currentColor) return;
-  document.querySelector('.cur-color').style.backgroundColor = currentColor;
-  document.querySelector('.prev-color').style.backgroundColor = previousColor;
+  temp = firstColor.value;
+  firstColor.value = secColor.value;
+  secColor.value = temp;
+}
+
+function createFrame() {
+  frames.insertAdjacentHTML('beforeend', `<div class = "frame-block">
+  <div class = "frame-num"></div>
+  <div class = "frame-remove">
+      <img src = "https://img.icons8.com/material-sharp/20/000000/filled-trash.png">
+  </div>
+  <canvas class = "frame" height = "128" width = "128"></canvas>
+  <div class = "frame-copy">
+      <img src="https://img.icons8.com/ios-filled/20/000000/copy.png">
+  </div>
+  </div>`);
+  frameCounter();
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  now = Date.now();
+  elapsed = now - then;
+  if (elapsed > timeoutMs) {
+    then = now - (elapsed % timeoutMs);
+    const preview = document.querySelector('.preview');
+    const previewCtx = preview.getContext('2d');
+    currentFrame = (currentFrame + 1) % imgArr.length;
+    previewCtx.clearRect(0, 0, preview.width, preview.height);
+    const img = new Image();
+    img.src = imgArr[currentFrame];
+    img.onload = () => {
+      previewCtx.drawImage(img, 0, 0, preview.width, preview.height);
+    };
+  }
+}
+
+function startAnimating() {
+  timeoutMs = 1000 / fpsNum;
+  then = Date.now();
+  animate();
+}
+
+function previewAnim() {
+  frameCounter();
+  for (let i = 0; i < canvasFrame.length; i += 1) {
+    const each = canvasFrame[i];
+    const image = each.toDataURL();
+    imgArr[i] = image;
+  }
+}
+
+function drawFrame() {
+  frameCounter();
+  fpsChange();
+  startAnimating(timeoutMs);
+  const smallCanvas = document.querySelector('.active-frame');
+  const smallCtx = smallCanvas.getContext('2d');
+  const toPaste = ctx.getImageData(0, 0, maxFieldSize, maxFieldSize);
+  smallCtx.putImageData(toPaste, 0, 0);
+}
+
+function deleteFrame() {
+  this.parentElement.remove();
+  frameCounter();
+}
+
+function copy(e) {
+  const parent = e.currentTarget.parentElement;
+  const parentCanv = parent.children[2];
+  const parentCtx = parentCanv.getContext('2d');
+  const pasteCopy = parentCtx.getImageData(0, 0, parentCanv.width, parentCanv.height);
+  parent.insertAdjacentHTML('afterend', `<div class = "frame-block">
+  <div class = "frame-num"></div>
+  <div class = "frame-remove">
+      <img src = "https://img.icons8.com/material-sharp/20/000000/filled-trash.png">
+  </div>
+  <canvas class = "frame" height = "128" width = "128"></canvas>
+  <div class = "frame-copy">
+      <img src="https://img.icons8.com/ios-filled/20/000000/copy.png">
+  </div>
+  </div>`);
+  frameCounter();
+  const newCanv = parent.nextElementSibling.children[2];
+  const newCtx = newCanv.getContext('2d');
+  newCtx.putImageData(pasteCopy, 0, 0);
+}
+
+function frameCounter() {
+  block = document.querySelectorAll('.frame-block');
+  canvasFrame = document.querySelectorAll('.frame');
+  block.forEach((elem, i) => {
+    const num = elem.querySelector('.frame-num');
+    num.innerText = i + 1;
+  });
+  for (let i = 0; i < canvasFrame.length; i += 1) {
+    canvasFrame[i].addEventListener('click', () => {
+      for (let j = 0; j < canvasFrame.length; j += 1) {
+        canvasFrame[j].classList.remove('active-frame');
+      }
+      canvasFrame[i].classList.add('active-frame');
+    })
+  }
+  canvasFrame.forEach((elem) => {
+    elem.addEventListener('click', save);
+  });
+  removeFrame = document.querySelectorAll('.frame-remove');
+  for (let i = 0; i < removeFrame.length; i += 1) {
+    removeFrame[i].addEventListener('mousedown', deleteFrame);
+  }
+  copyFrame = document.querySelectorAll('.frame-copy');
+  for (let i = 0; i < copyFrame.length; i += 1) {
+    copyFrame[i].addEventListener('mousedown', copy);
+  }
+  for (let i = 0; i < block.length; i += 1) {
+    block[i].addEventListener('click', () => {
+      ctx.clearRect(0, 0, maxFieldSize, maxFieldSize);
+    })
+  }
+}
+
+function save() {
+  previewAnim();
+  activeFrame = document.querySelector('.active-frame');
+  activeCtx = activeFrame.getContext('2d');
+  index = +activeFrame.parentElement.children[0].textContent;
+  if (!imgArr[index - 1]) {
+    return
+  } else {
+    const restore = new Image();
+    restore.src = imgArr[index - 1];
+    restore.onload = () => {
+      ctx.drawImage(restore, 0, 0, canvas.width, canvas.height);
+    };
+  }
+}
+
+function selectColor() {
+  currentColor = firstColor.value;
 }
 
 function getCursorPosition(event) {
@@ -244,22 +422,9 @@ function colorPicker(pos) {
     const r = ctx.getImageData(Math.floor(x / (maxFieldSize / canvas.height)), Math.floor(y / (maxFieldSize / canvas.width)), 1, 1).data[0];
     const g = ctx.getImageData(Math.floor(x / (maxFieldSize / canvas.height)), Math.floor(y / (maxFieldSize / canvas.width)), 1, 1).data[1];
     const b = ctx.getImageData(Math.floor(x / (maxFieldSize / canvas.height)), Math.floor(y / (maxFieldSize / canvas.width)), 1, 1).data[2];
-    previousColor = currentColor;
     currentColor = rgbConvert(r, g, b);
-    if (previousColor === currentColor) {
-      return;
-    }
-    changeColors();
+    firstColor.value = currentColor;
     activeTool = 'colorPicker';
-  }
-}
-
-function changeCurrentColor(e) {
-  if (e.target === previous || e.target === previous.children[1]) {
-    const temp = currentColor;
-    currentColor = previousColor;
-    previousColor = temp;
-    changeColors();
   }
 }
 
@@ -276,11 +441,6 @@ function selectTool(e) {
       }
     }
   }
-}
-
-function selectCurrentColor() {
-  previousColor = currentColor;
-  changeColors();
 }
 
 function binds(event) {
@@ -339,6 +499,9 @@ function binds(event) {
       strokeEnable = false;
       activeTool = 'floodfill';
       break;
+    case swapCode: {
+      changeColors();
+    }
   }
 }
 
@@ -477,9 +640,8 @@ for (let i = 0; i < brushes.length; i += 1) {
 
 showShortcuts.onclick = () => shortcuts.classList.remove('closed');
 close.onclick = () => shortcuts.classList.add('closed');
-colors.addEventListener('mousedown', changeCurrentColor);
+addFrame.addEventListener('click', createFrame);
 canvas.addEventListener('mousedown', choosing);
-choose.addEventListener('input', selectCurrentColor);
 canvas.addEventListener('mousedown', drawMouseDown);
 canvas.addEventListener('mousemove', drawMouseMove);
 canvas.addEventListener('mouseup', drawMouseUp);
@@ -487,3 +649,9 @@ canvas.addEventListener('mouseout', drawMouseOut);
 canvas.addEventListener('mousedown', strokeTool);
 canvas.addEventListener('mousedown', fill);
 document.addEventListener('keyup', binds);
+canvas.addEventListener('mousemove', selectColor);
+colorSwap.addEventListener('mousedown', changeColors);
+fps.addEventListener('mousedown', fpsChange);
+fps.addEventListener('mousemove', fpsChange);
+canvas.addEventListener('mouseup', drawFrame);
+canvas.addEventListener('mousemove', previewAnim);

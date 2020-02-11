@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Simple Piskel Clone</title>
+        <link rel = "stylesheet" href = "style.css">
+        <link rel = "shortcut icon" href = "assets/favicon.png">
+        <link href = "https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <sector class = "shortcuts closed">
+            <div class = "shortcuts__container">
+                <div class = "shortcuts__header">
+                    <div class = "shortcuts__header_descr">
+                        Keyboard Shortcuts
+                    </div>
+                    <div class = "shortcuts__header_close">
+                        X
+                    </div>
+                </div>
+                <div class = "shortcuts__keys">
+                    <div class = "shortcuts__keys_key">
+                        <div class = "hotkey-image">
+                            <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.7782 11.25C17.7782 11.25 15.556 14.5072 15.556 15.75C15.556 16.9928 16.5511 18 17.7782 18C19.0053 18 20.0004 16.9928 20.0004 15.75C20.0004 14.5072 17.7782 11.25 17.7782 11.25ZM17.4528 7.63102L10.2414 0.329414C10.0244 0.109687 9.73999 0 9.45561 0C9.17124 0 8.88686 0.109687 8.67019 0.329414L5.83755 3.19746L2.84519 0.167344C2.62818 -0.0523828 2.27644 -0.0523828 2.05978 0.167344L1.27436 0.962578C1.05769 1.1823 1.05769 1.53844 1.27436 1.75781L4.26707 4.78758L0.97679 8.11898C-0.324946 9.43664 -0.324946 11.5734 0.97679 12.8914L5.04589 17.0114C5.69658 17.6702 6.54971 18 7.40248 18C8.25561 18 9.10839 17.6706 9.75908 17.0114L17.4525 9.22184C17.8865 8.78238 17.8865 8.07047 17.4528 7.63102ZM13.4174 10.1261H2.28964C2.33686 9.99105 2.4136 9.84551 2.54762 9.71016L3.00422 9.24785L5.8379 6.37875L7.87262 8.43891C8.3063 8.87801 9.00978 8.87801 9.44346 8.43891C9.87714 7.9998 9.87714 7.28754 9.44346 6.84844L7.40874 4.78828L9.45561 2.71582L15.0959 8.4266L13.4174 10.1261Z" fill="black" fill-opacity="0.5413"/>
+                            </svg>
+                        </div>
+                        <span class = "hotkey">
+                            B
+                        </span>
+                        <span>
+                            Paint Bucket
+                        </span>
+                    </div>
+                    <div class = "shortcuts__keys_key">
+                        <div class = "hotkey-image">
+                            <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.7782 11.25C17.7782 11.25 15.556 14.5072 15.556 15.75C15.556 16.9928 16.5511 18 17.7782 18C19.0053 18 20.0004 16.9928 20.0004 15.75C20.0004 14.5072 17.7782 11.25 17.7782 11.25ZM17.4528 7.63102L10.2414 0.329414C10.0244 0.109687 9.73999 0 9.45561 0C9.17124 0 8.88686 0.109687 8.67019 0.329414L5.83755 3.19746L2.84519 0.167344C2.62818 -0.0523828 2.27644 -0.0523828 2.05978 0.167344L1.27436 0.962578C1.05769 1.1823 1.05769 1.53844 1.27436 1.75781L4.26707 4.78758L0.97679 8.11898C-0.324946 9.43664 -0.324946 11.5734 0.97679 12.8914L5.04589 17.0114C5.69658 17.6702 6.54971 18 7.40248 18C8.25561 18 9.10839 17.6706 9.75908 17.0114L17.4525 9.22184C17.8865 8.78238 17.8865 8.07047 17.4528 7.63102ZM13.4174 10.1261H2.28964C2.33686 9.99105 2.4136 9.84551 2.54762 9.71016L3.00422 9.24785L5.8379 6.37875L7.87262 8.43891C8.3063 8.87801 9.00978 8.87801 9.44346 8.43891C9.87714 7.9998 9.87714 7.28754 9.44346 6.84844L7.40874 4.78828L9.45561 2.71582L15.0959 8.4266L13.4174 10.1261Z" fill="black" fill-opacity="0.5413"/>
+                            </svg>
+                        </div>
+                        <span class = "hotkey">
+                            F
+                        </span>
+                        <span>
+                            Flood fill
+                        </span>
+                    </div>
+                    <div class = "shortcuts__keys_key">
+                        <div class = "hotkey-image">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.98242 13.0176C1.51367 13.4863 1.25 14.1223 1.25 14.7856V16.5625L0 18.75L1.25 20L3.4375 18.75H5.21445C5.87734 18.75 6.51328 18.4867 6.98203 18.018L11.9289 13.0719L6.92891 8.07189L1.98242 13.0176ZM18.9016 1.09845C17.4379 -0.366394 15.0625 -0.366394 13.5988 1.09845L10.5875 4.10978L10.0758 3.59806C9.70703 3.22931 9.11289 3.23439 8.75 3.59806L7.14961 5.19845C6.78359 5.56447 6.78359 6.15822 7.14961 6.52423L13.4754 12.85C13.8441 13.2188 14.4383 13.2137 14.8012 12.85L16.4016 11.25C16.7676 10.884 16.7676 10.2902 16.4016 9.92423L15.8898 9.41251L18.9012 6.40118C20.3664 4.93712 20.3664 2.5629 18.9016 1.09845Z" fill="black" fill-opacity="0.5413"/>
+                            </svg>
+                        </div>
+                        <span class = "hotkey">
+                            C
+                        </span>
+                        <span>
+                            Choose color
+                        </span>
+                    </div>
+                    <div class = "shortcuts__keys_key">
+                        <div class = "hotkey-image">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19.4493 5.55084L17.6485 7.35162C17.4649 7.53521 17.168 7.53521 16.9844 7.35162L12.6485 3.01568C12.4649 2.83209 12.4649 2.53522 12.6485 2.35162L14.4493 0.550842C15.1797 -0.179626 16.3672 -0.179626 17.1016 0.550842L19.4493 2.8985C20.1836 3.62897 20.1836 4.81646 19.4493 5.55084ZM11.1016 3.8985L0.843801 14.1563L0.015676 18.9024C-0.0976053 19.543 0.460989 20.0977 1.10161 19.9883L5.84771 19.1563L16.1055 8.89849C16.2891 8.7149 16.2891 8.41803 16.1055 8.23443L11.7696 3.8985C11.5821 3.7149 11.2852 3.7149 11.1016 3.8985ZM4.84771 13.2774C4.63286 13.0626 4.63286 12.7188 4.84771 12.504L10.8633 6.48834C11.0782 6.2735 11.4219 6.2735 11.6368 6.48834C11.8516 6.70318 11.8516 7.04693 11.6368 7.26178L5.62114 13.2774C5.4063 13.4922 5.06255 13.4922 4.84771 13.2774ZM3.43755 16.5626H5.31255V17.9805L2.79302 18.4219L1.57818 17.2071L2.01958 14.6876H3.43755V16.5626Z" fill="black" fill-opacity="0.5413"/>
+                            </svg>
+                        </div>
+                        <span class = "hotkey">
+                            P
+                        </span>
+                        <span>
+                            Pencil
+                        </span>
+                    </div>
+                    <div class = "shortcuts__keys_key">
+                        <div class = "hotkey-image">
+                            <img src = './assets/eraser.svg' height="20" width="20">
+                        </div>
+                        <div class = "hotkey">
+                            E
+                        </div>
+                        <span>
+                            Eraser
+                        </span>
+                    </div>
+                    <div class = "shortcuts__keys_key">
+                        <div class = "hotkey-image">
+                            <img src = './assets/horizontal-line.svg' height="20" width="20" style="transform: rotate(-45deg);">
+                        </div>
+                        <span class = "hotkey">
+                            L
+                        </span>
+                        <span>
+                            Stroke
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </sector>
+        <header>
+            <nav>
+                <div class = "menu">
+                    <h1>
+                        <a href = "index.html">
+                            Simple Piskel Clone
+                        </a>
+                    </h1>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div class = "container">
+                <div class = "tools-container">
+                    <section class = "tools">
+                        <div class = "brush" title = "Set brush size from 1 to 4 pixels">
+                            <div class = "brush__size small"></div>
+                            <div class = "brush__size medium"></div>
+                            <div class = "brush__size large"></div>
+                            <div class = "brush__size extralarge"></div>
+                        </div>
+                        <div class = "tools__descr">
+                            <div class = "tools__descr_link bucket tool">
+                                <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.7782 11.25C17.7782 11.25 15.556 14.5072 15.556 15.75C15.556 16.9928 16.5511 18 17.7782 18C19.0053 18 20.0004 16.9928 20.0004 15.75C20.0004 14.5072 17.7782 11.25 17.7782 11.25ZM17.4528 7.63102L10.2414 0.329414C10.0244 0.109687 9.73999 0 9.45561 0C9.17124 0 8.88686 0.109687 8.67019 0.329414L5.83755 3.19746L2.84519 0.167344C2.62818 -0.0523828 2.27644 -0.0523828 2.05978 0.167344L1.27436 0.962578C1.05769 1.1823 1.05769 1.53844 1.27436 1.75781L4.26707 4.78758L0.97679 8.11898C-0.324946 9.43664 -0.324946 11.5734 0.97679 12.8914L5.04589 17.0114C5.69658 17.6702 6.54971 18 7.40248 18C8.25561 18 9.10839 17.6706 9.75908 17.0114L17.4525 9.22184C17.8865 8.78238 17.8865 8.07047 17.4528 7.63102ZM13.4174 10.1261H2.28964C2.33686 9.99105 2.4136 9.84551 2.54762 9.71016L3.00422 9.24785L5.8379 6.37875L7.87262 8.43891C8.3063 8.87801 9.00978 8.87801 9.44346 8.43891C9.87714 7.9998 9.87714 7.28754 9.44346 6.84844L7.40874 4.78828L9.45561 2.71582L15.0959 8.4266L13.4174 10.1261Z" fill="black" fill-opacity="0.5413"/>
+                                </svg>
+                                <span>
+                                    Paint bucket
+                                </span>
+                            </div>
+                            <div class = "tools__descr">
+                                <div class = "tools__descr_link floodfill tool">
+                                    <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M17.7782 11.25C17.7782 11.25 15.556 14.5072 15.556 15.75C15.556 16.9928 16.5511 18 17.7782 18C19.0053 18 20.0004 16.9928 20.0004 15.75C20.0004 14.5072 17.7782 11.25 17.7782 11.25ZM17.4528 7.63102L10.2414 0.329414C10.0244 0.109687 9.73999 0 9.45561 0C9.17124 0 8.88686 0.109687 8.67019 0.329414L5.83755 3.19746L2.84519 0.167344C2.62818 -0.0523828 2.27644 -0.0523828 2.05978 0.167344L1.27436 0.962578C1.05769 1.1823 1.05769 1.53844 1.27436 1.75781L4.26707 4.78758L0.97679 8.11898C-0.324946 9.43664 -0.324946 11.5734 0.97679 12.8914L5.04589 17.0114C5.69658 17.6702 6.54971 18 7.40248 18C8.25561 18 9.10839 17.6706 9.75908 17.0114L17.4525 9.22184C17.8865 8.78238 17.8865 8.07047 17.4528 7.63102ZM13.4174 10.1261H2.28964C2.33686 9.99105 2.4136 9.84551 2.54762 9.71016L3.00422 9.24785L5.8379 6.37875L7.87262 8.43891C8.3063 8.87801 9.00978 8.87801 9.44346 8.43891C9.87714 7.9998 9.87714 7.28754 9.44346 6.84844L7.40874 4.78828L9.45561 2.71582L15.0959 8.4266L13.4174 10.1261Z" fill="black" fill-opacity="0.5413"/>
+                                    </svg>
+                                    <span>
+                                        Flood fill
+                                    </span>
+                                </div>
+                            </div>
+                            <div class = "tools__descr_link choose-color tool">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.98242 13.0176C1.51367 13.4863 1.25 14.1223 1.25 14.7856V16.5625L0 18.75L1.25 20L3.4375 18.75H5.21445C5.87734 18.75 6.51328 18.4867 6.98203 18.018L11.9289 13.0719L6.92891 8.07189L1.98242 13.0176ZM18.9016 1.09845C17.4379 -0.366394 15.0625 -0.366394 13.5988 1.09845L10.5875 4.10978L10.0758 3.59806C9.70703 3.22931 9.11289 3.23439 8.75 3.59806L7.14961 5.19845C6.78359 5.56447 6.78359 6.15822 7.14961 6.52423L13.4754 12.85C13.8441 13.2188 14.4383 13.2137 14.8012 12.85L16.4016 11.25C16.7676 10.884 16.7676 10.2902 16.4016 9.92423L15.8898 9.41251L18.9012 6.40118C20.3664 4.93712 20.3664 2.5629 18.9016 1.09845Z" fill="black" fill-opacity="0.5413"/>
+                                </svg>
+                                <span>
+                                    Choose color
+                                </span>
+                            </div>
+                        </div>
+                        <div class = "tools__descr">
+                            <div class = "tools__descr_link pencil tool">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19.4493 5.55084L17.6485 7.35162C17.4649 7.53521 17.168 7.53521 16.9844 7.35162L12.6485 3.01568C12.4649 2.83209 12.4649 2.53522 12.6485 2.35162L14.4493 0.550842C15.1797 -0.179626 16.3672 -0.179626 17.1016 0.550842L19.4493 2.8985C20.1836 3.62897 20.1836 4.81646 19.4493 5.55084ZM11.1016 3.8985L0.843801 14.1563L0.015676 18.9024C-0.0976053 19.543 0.460989 20.0977 1.10161 19.9883L5.84771 19.1563L16.1055 8.89849C16.2891 8.7149 16.2891 8.41803 16.1055 8.23443L11.7696 3.8985C11.5821 3.7149 11.2852 3.7149 11.1016 3.8985ZM4.84771 13.2774C4.63286 13.0626 4.63286 12.7188 4.84771 12.504L10.8633 6.48834C11.0782 6.2735 11.4219 6.2735 11.6368 6.48834C11.8516 6.70318 11.8516 7.04693 11.6368 7.26178L5.62114 13.2774C5.4063 13.4922 5.06255 13.4922 4.84771 13.2774ZM3.43755 16.5626H5.31255V17.9805L2.79302 18.4219L1.57818 17.2071L2.01958 14.6876H3.43755V16.5626Z" fill="black" fill-opacity="0.5413"/>
+                                </svg>
+                                <span>
+                                    Pencil
+                                </span>
+                            </div>
+                        </div>
+                        <div class = "tools__descr">
+                            <div class = "tools__descr_link eraser tool">
+                                <img src = './assets/eraser.svg' height="20" width="20">
+                                <span>
+                                    Eraser
+                                </span>
+                            </div>
+                        </div>
+                        <div class = "tools__descr">
+                            <div class = "tools__descr_link stroke tool">
+                                <img src = './assets/horizontal-line.svg' height="20" width="20" style="transform: rotate(-45deg);">
+                                <span>
+                                    Stroke
+                                </span>
+                            </div>
+                        </div>
+                    </section>
+                    <section class = "colors">
+                        <input type = "color" class = "colors__descr cur-color"></input>
+                        <input type = "color" class = "colors__descr sec-color"></input>
+                        <button class = "colors__swap" title = "Swap colors (X)"></button>
+                    </section>
+                </div>
+                <section class = "frames">
+                    <div class = "frames-container">
+                        <div class = "frame-block">
+                            <div class = "frame-num">1</div>
+                            <div class = "frame-remove">
+                                <img src = "https://img.icons8.com/material-sharp/20/000000/filled-trash.png">
+                            </div>
+                            <canvas class = "frame active-frame" height = "128" width = "128"></canvas>
+                            <div class = "frame-copy">
+                                <img src = "https://img.icons8.com/ios-filled/20/000000/copy.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "add-frame">
+                        <div class = "add-image">
+                            <img src = "https://img.icons8.com/ios/24/000000/add.png">
+                        </div>
+                        <span>
+                            Add new frame
+                        </span>
+                    </div>
+                </section>
+                <div class = "canvas-container">
+                    <canvas width = "128" height = "128" id = "canvas">Update browser</canvas>
+                </div>
+                <div class = "canvas-settings">
+                    <section class = "anim-player">
+                        <canvas width = "128" height = "128" class = "preview">Update browser</canvas>
+                        <div class = "fps">
+                            <span class = "fps__current"></span>
+                            <input class = "fps__change" type = "range" min = "1" max = "24" step = "1" value = "5">
+                        </div>
+                    </section>
+                    <section class = "switcher">
+                        <div class = "switcher__size">
+                            <div class = "switcher__size_checkbox"></div>
+                            <span>
+                                32x32
+                            </span>
+                        </div>
+                        <div class = "switcher__size">
+                            <div class = "switcher__size_checkbox"></div>
+                            <span>
+                                64x64
+                            </span>
+                        </div>
+                        <div class = "switcher__size">
+                            <div class = "switcher__size_checkbox"></div>
+                            <span>
+                                128x128
+                            </span>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class = "keys">
+                <img class = "keys__binds" src = "https://img.icons8.com/ios/50/000000/keyboard.png" title = "Show shortcuts">
+            </div>
+        </main>
+        <script src = "app.js"></script>
+    </body>
+</html>
