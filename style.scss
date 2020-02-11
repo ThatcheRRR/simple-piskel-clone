@@ -256,7 +256,16 @@ canvas {
 .anim-player {
     max-width: 200px;
     display: flex;
+    position: relative;
     flex-wrap: wrap;
+}
+.preview-icon {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    &:hover {
+        cursor: pointer;
+    }
 }
 .preview {
     width: 200px;

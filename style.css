@@ -444,8 +444,19 @@ canvas {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+}
+
+.preview-icon {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.preview-icon:hover {
+  cursor: pointer;
 }
 
 .preview {

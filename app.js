@@ -21,6 +21,7 @@ const curFps = document.querySelector('.fps__current');
 const addFrame = document.querySelector('.add-frame');
 const frames = document.querySelector('.frames-container');
 const preview = document.querySelector('.preview');
+const previewIcon = document.querySelector('.preview-icon');
 const ctx = canvas.getContext('2d');
 const tools = ['bucket', 'floodfill', 'colorPicker', 'pencil', 'eraser', 'stroke'];
 const pencilCode = 80;
@@ -61,7 +62,6 @@ let copyFrame = document.querySelector('.frame-copy');
 let snapshot;
 let brush;
 let block;
-let activeCtx;
 let temp;
 let canvasFrame;
 let timeoutMs = sec / fpsNum;
@@ -224,7 +224,6 @@ function frameCounter() {
 function save() {
   previewAnim();
   activeFrame = document.querySelector('.active-frame');
-  activeCtx = activeFrame.getContext('2d');
   index = +activeFrame.parentElement.children[0].textContent;
   if (!imgArr[index - 1]) {
     return
@@ -585,6 +584,22 @@ function fill(event) {
 function choosing(event) {
   colorPicker(getCursorPosition(event));
 }
+    
+function toggleFullScreen() {
+  if (!document.mozFullScreen && !document.webkitFullScreen) {
+    if (preview.mozRequestFullScreen) {
+      preview.mozRequestFullScreen();
+    } else {
+      preview.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+    }
+  } else {
+    if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else {
+      document.webkitCancelFullScreen();
+    }
+  }
+}
 
 for (let i = 0; i < tool.length; i += 1) {
   tool[i].addEventListener('mousedown', selectTool);
@@ -642,6 +657,7 @@ showShortcuts.onclick = () => shortcuts.classList.remove('closed');
 close.onclick = () => shortcuts.classList.add('closed');
 addFrame.addEventListener('click', createFrame);
 canvas.addEventListener('mousedown', choosing);
+previewIcon.addEventListener('click', toggleFullScreen);
 canvas.addEventListener('mousedown', drawMouseDown);
 canvas.addEventListener('mousemove', drawMouseMove);
 canvas.addEventListener('mouseup', drawMouseUp);
