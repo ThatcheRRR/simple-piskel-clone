@@ -76,7 +76,7 @@ a:hover img{
 }
 
 .overview {
-    padding: 30px 300px;
+    padding: 40px 300px;
     display: flex;
     justify-content: center;
     background: #000;
@@ -87,6 +87,10 @@ a:hover img{
     }
     &__statement {
         display: flex;
+        margin-bottom: 20px;
+        &:nth-child(3n) {
+            margin-bottom: 0;
+        }
     }
     &__left {
         margin-right: 10px;
