@@ -67,6 +67,7 @@ let canvasFrame;
 let timeoutMs = sec / fpsNum;
 
 // default settings
+let size = large;
 pencil.classList.add('active-tool');
 curFps.innerText = fps.value + ' ' + 'FPS';
 brush = 1;
@@ -153,8 +154,6 @@ function previewAnim() {
 }
 
 function drawFrame() {
-  frameCounter();
-  fpsChange();
   startAnimating(timeoutMs);
   const smallCanvas = document.querySelector('.active-frame');
   const smallCtx = smallCanvas.getContext('2d');
@@ -164,6 +163,8 @@ function drawFrame() {
 
 function deleteFrame() {
   this.parentElement.remove();
+  index -= 1;
+  imgArr.length = index;
   frameCounter();
 }
 
@@ -177,7 +178,7 @@ function copy(e) {
   <div class = "frame-remove">
       <img src = "https://img.icons8.com/material-sharp/20/000000/filled-trash.png">
   </div>
-  <canvas class = "frame" height = "128" width = "128"></canvas>
+  <canvas class = "frame" height = "${size}" width = "${size}"></canvas>
   <div class = "frame-copy">
       <img src="https://img.icons8.com/ios-filled/20/000000/copy.png">
   </div>
@@ -614,18 +615,19 @@ for (let i = 0; i < sizeSwitcher.length; i += 1) {
     if (sizeSwitcher[i].innerText === '32x32') {
       sizeSwitcher[i].classList.add('current-size');
       checkbox[i].classList.add('current-size__checkbox');
-      setCanvasSize(small);
+      size = small;
     }
     if (sizeSwitcher[i].innerText === '64x64') {
       sizeSwitcher[i].classList.add('current-size');
       checkbox[i].classList.add('current-size__checkbox');
-      setCanvasSize(medium);
+      size = medium;
     }
     if (sizeSwitcher[i].innerText === '128x128') {
       sizeSwitcher[i].classList.add('current-size');
       checkbox[i].classList.add('current-size__checkbox');
-      setCanvasSize(large);
+      size = large;
     }
+    setCanvasSize(size);
   });
 }
 
